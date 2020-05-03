@@ -1,0 +1,38 @@
+#!/bin/bash
+# Needs openconnect openvpn vpnc net-tools
+OVX='/usr/sbin/openvpn'
+OCX='/usr/sbin/openconnect'
+IPX='/bin/ip'
+NETID="pbaldara"
+VGRP="UCI"
+VURL="https://vpn.uci.edu"
+VSCRIPT='/etc/vpnc/vpnc-script'
+VLG="/tmp/ucivpn.log"
+
+[ $EUID -ne 0 ] && echo "ucivpn: Root access required." && exit 1
+
+for FILE in $OVX $OCX $IPX $VSCRIPT; do
+  [ -f "$FILE" ] || (echo "ucivpn: $FILE does not exist." && exit 1)
+done
+
+ocpid=$(pidof openconnect)
+[ ! -z "$ocpid" ] && echo "Killing existing openconnect." && kill -9 $ocpid
+
+$OVX --rmtun --dev tun2 >> $VLG 2>&1
+[ -f "/tmp/resolv.conf" ] && cp /tmp/resolv.conf /etc && rm /tmp/resolv.conf
+
+[ "$1" = "close" ] && echo "Closed down VPN." && exit 0
+[ $# -ne 0 ] && echo -e "ucivpn Invalid parameter. Expected \"close\" or \"\"." && exit 1
+
+cp /etc/resolv.conf /tmp/resolv.conf.tmp
+echo "Creating OpenVPN tun2 interface."
+$OVX --mktun --dev tun2 >> $VLG 2>&1 || (echo "ucivpn: tun2 creation returned with error." && exit 1)
+echo "OpenVPN tun2 interface created."
+cp /tmp/resolv.conf.tmp /tmp/resolv.conf && rm /tmp/resolv.conf.tmp
+
+echo "Opening up OpenVPN tun2 interface."
+ifconfig tun2 up >> $VLG 2>&1 || (echo "ucivpn: OpenVPN tun2 interface setup returned with error." && exit 1)
+echo "OpenVPN tun2 interface opened up."
+
+$OCX -b -s "$VSCRIPT" --user="$NETID" --authgroup="$VGRP" --interface="tun2" "$VURL"
+sleep 2

@@ -1,0 +1,31 @@
+#!/bin/bash
+[ $# -eq 0 ] && echo "Usage: open file1 file2 file3" && exit 0
+while (( $# )); do
+	case $1 in
+		-*)
+			;;
+		--*)
+			;;
+		*)
+			break
+	esac
+	shift
+done
+
+while (( $# )); do
+	[ ! -e "$1" ] && echo "open: '$(realpath "$1")' does not exist"
+	case "$1" in
+		*.png|*.pgm|*.jpg)
+			feh "$1" &
+			;;
+		*.pdf)
+			zathura "$1" &
+			;;
+		*.html)
+			firefox "$1" &
+			;;
+		*)
+			echo "open: '$(realpath "$1")' unknown file extension"
+	esac
+	shift
+done
