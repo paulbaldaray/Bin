@@ -3,13 +3,12 @@
 OVX='/usr/sbin/openvpn'
 OCX='/usr/sbin/openconnect'
 IPX='/bin/ip'
-NETID="pbaldara"
 VGRP="UCI"
 VURL="https://vpn.uci.edu"
 VSCRIPT='/etc/vpnc/vpnc-script'
 VLG="/tmp/ucivpn.log"
 
-[ $EUID -ne 0 ] && echo "ucivpn: Root access required." && exit 1
+[ "$EUID" -ne 0 ] && echo "ucivpn: Root access required." && exit 1
 
 for FILE in $OVX $OCX $IPX $VSCRIPT; do
   [ -f "$FILE" ] || (echo "ucivpn: $FILE does not exist." && exit 1)
@@ -34,5 +33,5 @@ echo "Opening up OpenVPN tun2 interface."
 ifconfig tun2 up >> $VLG 2>&1 || (echo "ucivpn: OpenVPN tun2 interface setup returned with error." && exit 1)
 echo "OpenVPN tun2 interface opened up."
 
-$OCX -b -s "$VSCRIPT" --user="$NETID" --authgroup="$VGRP" --interface="tun2" "$VURL"
+$OCX -b -s "$VSCRIPT" --authgroup="$VGRP" --interface="tun2" "$VURL"
 sleep 2

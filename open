@@ -13,19 +13,26 @@ while (( $# )); do
 done
 
 while (( $# )); do
-	[ ! -e "$1" ] && echo "open: '$(realpath "$1")' does not exist"
+	if [ ! -e "$1" ]; then
+		echo "open: '$(realpath "$1")' does not exist"
+		shift
+		continue
+	fi
 	case "$1" in
 		*.png|*.pgm|*.jpg)
-			feh "$1" &
+			prog="sxiv"
 			;;
 		*.pdf)
-			zathura "$1" &
+			prog="zathura"
 			;;
 		*.html)
-			firefox "$1" &
+			prog="firefox --private-window"
 			;;
 		*)
 			echo "open: '$(realpath "$1")' unknown file extension"
+			shift
+			continue
 	esac
+	devour $prog "$1"
 	shift
 done
