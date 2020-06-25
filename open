@@ -1,8 +1,10 @@
 #!/bin/bash
 [ $# -eq 0 ] && echo "Usage: open file1 file2 file3" && exit 0
+wrapper=""
 while (( $# )); do
-	case $1 in
-		-*)
+	case "$1" in
+		-d)
+			wrapper="devour"
 			;;
 		--*)
 			;;
@@ -33,6 +35,6 @@ while (( $# )); do
 			shift
 			continue
 	esac
-	devour $prog "$1"
+	$wrapper $prog "$1"
 	shift
 done
