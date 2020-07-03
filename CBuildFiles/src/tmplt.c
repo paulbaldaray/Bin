@@ -81,4 +81,9 @@ int main(int argc, char **argv) {
 				break;
 		}
 	}
+
+	if (curr_dir) free(curr_dir);
+	for (int i = 0; i < num_file_names; ++i) if (file_names[i])
+		free(file_names[i]);
+	if (file_names) free(file_names);
 }
