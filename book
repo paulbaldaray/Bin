@@ -1,4 +1,5 @@
 #!/bin/bash
+BOOKDIR="$HOME/Books"
 [ $# -ne 1 ] && echo "Error: book not specified" && exit 1
-[ ! -f "$HOME/Books/$1.pdf" ] && echo "Error: Book does not exist" && exit 1
-exec open $HOME/Books/$1.pdf
+[ ! -f "$BOOKDIR/$1.pdf" ] && echo "Error: Book does not exist" && exit 1
+exec open "$BOOKDIR/$1.pdf"

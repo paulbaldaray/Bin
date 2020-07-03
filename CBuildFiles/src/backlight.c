@@ -3,13 +3,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include "backlight.h"
 
 int ftruncate(int filedes, off_t length);
 int fileno(FILE* stream);
-
-int max_brightness = 19200;
-char *brightness_path = "/sys/class/backlight/intel_backlight/brightness";
-/* char *brightness_path = "/home/paul/brightness"; */
 
 int per_to_num(int per) {
 	return max_brightness * per / 1000 + (per < 0 ? -1 : !!per);

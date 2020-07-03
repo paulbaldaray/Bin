@@ -1,0 +1,27 @@
+#!/bin/bash
+vlang_dir="$HOME/.vim/lang"
+action="vim"
+quiet=false
+
+while [ ! -z "$1" ] ; do
+	case "$1" in
+		-*) for i in $(seq 2 ${#1}); do
+					opt=${1:i-1:1}
+					case $opt in
+						p) action="echo"; quiet=true;;
+						r) action="rm";;
+						*) echo "Option '$opt' does not exist." && exit 1;;
+					esac
+				done;;
+		*) break;;
+	esac
+	shift
+done
+
+case "$1" in
+	all) files=$vlang_dir/*.vim;;
+	"") echo "No filetype specified" && exit 1;;
+	*) files=$vlang_dir/${1}.vim;;
+esac
+[ "$quiet" = false ] && echo "$action $files"
+$action $files
