@@ -14,7 +14,7 @@ are defined in the backlight.h configuration file. This program can really be us
 change a lot of files, but I wrote it to just change the backlight on my
 monitors. May need to be run as sudo.
 
-### USAGE
+### usage
 
 backlight <u>integer between -1000 to 1000</u>
 
@@ -23,7 +23,7 @@ backlight <u>integer between -1000 to 1000</u>
 Checks if a pdf exists in the Book directory and opens it using the 'open'
 script.
 
-### USAGE
+### usage
 
 book <u>File</u>
 
@@ -36,7 +36,7 @@ https://github.com/salman-abedin/devour/.
 
 Opens a file based on its file extension.
 
-### USAGE
+### usage
 
 open [options] <u>File</u>...
 
@@ -54,7 +54,7 @@ Opens a vpn tunnel and connects to the UCI VPN after authenticating login
 infromation. Needs to be run as sudo and requires the packages openvpn,
 openconnect, vpnc, net-tools on Arch-based distros.
 
-### USAGE
+### usage
 
 sudo ucivpn [close]
 
@@ -63,6 +63,6 @@ sudo ucivpn [close]
 Open individual settings for vim languages in the .vim/lang folder. Useful
 to keep the vimrc small and organized. 'all' will open all filetypes in vim.
 
-### USAGE
+### usage
 
 vlang <u>filetype extension|'all'</u>
