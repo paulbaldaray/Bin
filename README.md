@@ -44,7 +44,10 @@ open [options] <u>File</u>...
 
 Checks if templates exist in the Template directory and concatenates them.
 
+### usage
+
 tmplt <u>tmplt_dir</u> <u>tmplt_name</u> <u>output_file</u>
+
 tmplt -d <u>tmplt_dir</u>... -f <u>tmplt_name</u>... -o <u>output_file</u>... <u>repeat_flags_and_args</u>
 
 
