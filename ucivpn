@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # using packages: openconnect openvpn vpnc net-tools
 # the names may differ based on distro, but these should work on Arch
 

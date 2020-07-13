@@ -1,5 +1,13 @@
 #!/bin/bash
 BOOKDIR="$HOME/Books"
-[ $# -ne 1 ] && echo "Error: book not specified" && exit 1
-[ ! -f "$BOOKDIR/$1.pdf" ] && echo "Error: Book does not exist" && exit 1
-exec open "$BOOKDIR/$1.pdf"
+cd "$BOOKDIR"
+while ((1)); do
+	book=$(ls | dmenu)
+	if [ -d "$book" ]; then
+		cd "$book"
+	elif [ -f "$book" ]; then
+		exec open "$book"
+	else
+		exit 1
+	fi
+done
