@@ -1,5 +1,5 @@
 #!/bin/bash
-vlang_dir="$HOME/.vim/lang"
+vlang_dir="$HOME/.config/nvim/lang"
 action="vim"
 quiet=false
 
