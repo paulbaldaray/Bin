@@ -1,6 +1,6 @@
 #!/bin/bash
 vlang_dir="$HOME/.config/nvim/lang"
-action="vim"
+action="nvim"
 quiet=false
 
 while [ ! -z "$1" ] ; do
