@@ -1,0 +1,13 @@
+#!/bin/bash
+function PANIC() { echo "$@"; exit 1; }
+[ $# -eq 0 ] && PANIC "usage: toggle Program1 Program2..."
+while (($#)); do
+	which "$1" > /dev/null 2>&1 || PANIC "toggle: program not found in PATH"
+	pprog=$(pidof "$1")
+	if [ -z "$pprog" ]; then
+		"$1" &
+	else
+		kill $pprog
+	fi
+	shift
+done

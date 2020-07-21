@@ -9,7 +9,7 @@ VGRP='UCI'
 VURL='https://vpn.uci.edu'
 VSCRIPT='/etc/vpnc/vpnc-script'
 
-function PANIC() { echo "$1" && exit 1; }
+function PANIC() { echo "$@"; exit 1; }
 
 [ "$EUID" -ne 0 ] && PANIC "ucivpn: root access required."
 
