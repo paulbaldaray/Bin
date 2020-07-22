@@ -1,0 +1,8 @@
+#!/bin/bash
+[ $# -ne 2 ] && echo "usage: swap File1 File2" && exit 1
+[ ! -e "$1" ] && echo "File1 '$1' does not exist" && exit 1
+[ ! -e "$2" ] && echo "File2 '$2' does not exist" && exit 1
+temp='dFTAFOUfmJQsyaOZ.JXnE8ggIbbCG5iF3'
+mv "$1" "$temp"
+mv "$2" "$1"
+mv "$temp" "$2"
