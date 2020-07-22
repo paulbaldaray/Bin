@@ -40,6 +40,15 @@ Opens a file based on its file extension.
 
 open [options] File...
 
+## pullall - BASH
+
+Reads a file specified in script and pulls from origin master from all of them
+asynchronously.
+
+### usage
+
+pullall
+
 ## swap - BASH
 
 Swaps two filenames.

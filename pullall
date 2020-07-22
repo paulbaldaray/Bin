@@ -1,0 +1,18 @@
+#!/bin/bash
+PULLPATH="$HOME/.config/pullall"
+[ ! -f "$PULLPATH" ] && echo "pullall: file '$PULLPATH' does not exist" && exit 1
+
+function cd_and_pull () {
+	[ ! -d "$1" ] && echo "pullall: directory $p does not exist" && exit 1
+	cd "$1"
+	git pull origin master > /dev/null 2>&1 \
+		&& echo "pullall: Pull for '$1' succeeded" \
+		|| echo "pullall: Pull for '$1' failed"
+	exit
+}
+
+for p in $(cat $PULLPATH); do
+	cd_and_pull "$p" &
+done
+
+wait
