@@ -16,16 +16,16 @@ monitors. May need to be run as sudo.
 
 ### usage
 
-backlight <u>integer between -1000 to 1000</u>
+backlight integer between -1000 to 1000
 
 ## book - BASH
 
 Checks if a pdf exists in the Book directory and opens it using the 'open'
-script.
+script. Uses dmenu to traverse directories and select files.
 
 ### usage
 
-book <u>File</u>
+book File
 
 ## devour - BASH
 
@@ -38,7 +38,15 @@ Opens a file based on its file extension.
 
 ### usage
 
-open [options] <u>File</u>...
+open [options] File...
+
+## swap - BASH
+
+Swaps two filenames.
+
+### usage
+
+swap File1 File2
 
 ## tmplt - C
 
@@ -46,10 +54,18 @@ Checks if templates exist in the Template directory and concatenates them.
 
 ### usage
 
-tmplt <u>tmplt_dir</u> <u>tmplt_name</u> <u>output_file</u>
+tmplt tmplt\_dir tmplt\_name output\_file
 
-tmplt -d <u>tmplt_dir</u>... -f <u>tmplt_name</u>... -o <u>output_file</u>... <u>repeat_flags_and_args</u>
+tmplt -d tmplt\_dir... -f tmplt\_name... -o output\_file... repeat\_flags\_and\_args
 
+## toggle - BASH
+
+Runs program on if it's not running and kills it if it is. I use this for
+turning off and on my compositor.
+
+### usage
+
+toggle Program1 Program2
 
 ## ucivpn - BASH
 
@@ -68,4 +84,4 @@ to keep the vimrc small and organized. 'all' will open all filetypes in vim.
 
 ### usage
 
-vlang <u>filetype extension|'all'</u>
+vlang filetype\_extension|'all'
