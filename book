@@ -1,8 +1,9 @@
 #!/bin/bash
+# requires dmenu
 BOOKDIR="$HOME/Books"
 cd "$BOOKDIR"
 while ((1)); do
-	book=$(ls | dmenu)
+	book=$(ls | dmenu -p 'Book:')
 	if [ -d "$book" ]; then
 		cd "$book"
 	elif [ -f "$book" ]; then
