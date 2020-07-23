@@ -25,7 +25,7 @@ script. Uses dmenu to traverse directories and select files.
 
 ### usage
 
-book File
+book
 
 ## devour - BASH
 
@@ -48,6 +48,15 @@ asynchronously.
 ### usage
 
 pullall
+
+## screenshot - BASH
+
+Takes a selected area screenshot with scrot and has the user enter a name with
+dmenu.
+
+### usage
+
+screenshot
 
 ## swap - BASH
 

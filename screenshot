@@ -1,0 +1,9 @@
+#!/bin/bash
+# requires dmenu and scrot
+DEFAULTDIR="$HOME/Pictures"
+temp="$DEFAULTDIR/Mz9cuuq9miRf59nL7Kt9"
+sleep .2 ; scrot -s "$temp"
+[ ! -e "$temp" ] && exit
+file="$DEFAULTDIR/$(echo -n | dmenu -p 'Name:').png"
+[ -z "$file" ] && rm "$temp" && exit
+mv "$temp" "$file"
