@@ -1,6 +1,6 @@
 # Personal bin programs
 
-These are just some scripts and programs that I use on a daily basis.
+These are just some scripts and programs I've written that I use on a daily basis.
 
 To use the programs written and C, you'll want to configure the header files
 in 'CBuildFiles/config/' to and then run 'make' in the 'CBuildFiles' directory.
@@ -26,11 +26,6 @@ script. Uses dmenu to traverse directories and select files.
 ### usage
 
 book
-
-## devour - BASH
-
-Written by salman-abedin and cloned from
-https://github.com/salman-abedin/devour/.
 
 ## open - BASH
 

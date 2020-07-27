@@ -3,21 +3,7 @@ image="sxiv"
 pdf="zathura"
 webpage="firefox --private-window"
 
-[ $# -eq 0 ] && echo "Usage: open file1 file2 file3" && exit 0
-wrapper=""
-while (( $# )); do
-	case "$1" in
-		-d)
-			wrapper="devour"
-			;;
-		--*)
-			;;
-		*)
-			break
-	esac
-	shift
-done
-
+[ $# -eq 0 ] && echo "Usage: open file1 file2 file3..." && exit 0
 while (( $# )); do
 	if [ ! -e "$1" ]; then
 		echo "open: '$(realpath "$1")' does not exist"
@@ -39,6 +25,6 @@ while (( $# )); do
 			shift
 			continue
 	esac
-	$wrapper $prog "$1"
+	$prog "$1" &
 	shift
 done
