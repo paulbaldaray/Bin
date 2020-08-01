@@ -1,7 +1,7 @@
 #!/bin/bash
+# followed this guide: https://github.com/dnschneid/crouton/wiki/Using-Cisco-AnyConnect-VPN-with-openconnect
 # using packages: openconnect openvpn vpnc net-tools
 # the names may differ based on distro, but these should work on Arch
-
 OVX='/usr/sbin/openvpn'
 OCX='/usr/sbin/openconnect'
 IPX='/bin/ip'
@@ -13,7 +13,7 @@ function PANIC() { echo "$@"; exit 1; }
 
 [ "$EUID" -ne 0 ] && PANIC "ucivpn: root access required."
 
-for FILE in $OVX $OCX $IPX $VSCRIPT; do
+for FILE in "$OVX" "$OCX" "$IPX" "$VSCRIPT"; do
   [ -f "$FILE" ] || PANIC "ucivpn: $FILE does not exist."
 done
 
@@ -23,13 +23,12 @@ ocpid=$(pidof openconnect)
 $OVX --rmtun --dev tun1
 [ -f "/tmp/resolv.conf" ] && cp /tmp/resolv.conf /etc && rm /tmp/resolv.conf
 
-[ "$1" = "close" ] && echo "Closed down VPN." && exit 0
-[ $# -ne 0 ] && PANIC "ucivpn: invalid parameter '$1'. expected close"
+[ $# -ne 0 ] && echo "Closed down VPN." && exit 0
 
 cp /etc/resolv.conf /tmp/resolv.conf.tmp
-$OVX --mktun --dev tun1 || PANIC "ucivpn: tun1 creation returned with error."
+"$OVX" --mktun --dev tun1 || PANIC "ucivpn: tun1 creation returned with error."
 cp /tmp/resolv.conf.tmp /tmp/resolv.conf && rm /tmp/resolv.conf.tmp
 ifconfig tun1 up || PANIC "ucivpn: OpenVPN tun1 interface setup returned with error."
 
-$OCX -b -s "$VSCRIPT" --authgroup="$VGRP" --interface='tun1' "$VURL"
+"$OCX" -bs "$VSCRIPT" --authgroup="$VGRP" --interface='tun1' "$VURL"
 sleep 2
