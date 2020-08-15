@@ -27,6 +27,14 @@ script. Uses dmenu to traverse directories and select files.
 
 book
 
+## icpp - BASH
+
+Pseudo-interpreter for c++. Compiles a temporary binary, runs it, and then deletes it. If no argument is specified, it will search for main.cpp. I use this for competitive programming.
+
+### usage
+
+icpp [File]
+
 ## open - BASH
 
 Opens a file based on its file extension.
