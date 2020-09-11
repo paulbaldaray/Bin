@@ -6,17 +6,13 @@ To use the programs written and C, you'll want to configure the header files
 in 'CBuildFiles/config/' to and then run 'make' in the 'CBuildFiles' directory.
 The symbolic links to the generated binaries are already in the base directory.
 
-## backlight - C
+## brightness - Python
 
-Increments or decrements a file containing one number by a tenth of a percentage of some
-statically defined maximum number. Both the file name and the maximum number
-are defined in the backlight.h configuration file. This program can really be used to
-change a lot of files, but I wrote it to just change the backlight on my
-monitors. May need to be run as sudo.
+Increments or decrements a file that controls the backlight by a thousandth of a percentage of some maximum. If the file does not exist, it will try to change the software brightness through xrandr. May need to be run as sudo.
 
 ### usage
 
-backlight integer between -1000 to 1000
+brightness [-h] [-s] change
 
 ## book - BASH
 

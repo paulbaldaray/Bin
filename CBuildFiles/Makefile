@@ -1,13 +1,7 @@
-all: setup bin/backlight bin/tmplt
+all: setup bin/tmplt
 
 CC := gcc
 CFLAGS := -I config -std=c99 -Wall -pedantic
-
-bin/backlight: obj/backlight.o
-	$(CC) $(CFLAGS) obj/backlight.o -o bin/backlight
-
-obj/backlight.o: src/backlight.c config/backlight.h
-	$(CC) $(CFLAGS) src/backlight.c -c -o obj/backlight.o
 
 bin/tmplt: obj/tmplt.o
 	$(CC) $(CFLAGS) obj/tmplt.o -o bin/tmplt
