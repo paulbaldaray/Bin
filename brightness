@@ -5,7 +5,7 @@ import sys
 
 pname='brightness'
 max_brightness = 19200
-min_brightness = 10
+min_brightness = 100
 brightness_path = '/sys/class/backlight/intel_backlight/brightness'
 
 def panic(msg: str):
