@@ -1,6 +1,6 @@
 #!/bin/bash
 # requires dmenu and scrot
-DEFAULTDIR="$HOME/Pictures"
+DEFAULTDIR="$HOME/Pictures/screenshots"
 temp="$DEFAULTDIR/Mz9cuuq9miRf59nL7Kt9"
 sleep .2 ; scrot -s "$temp"
 [ ! -e "$temp" ] && exit
