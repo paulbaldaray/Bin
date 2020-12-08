@@ -4,7 +4,7 @@ import os
 import sys
 
 pname='brightness'
-max_brightness = 19200
+max_brightness = 24242
 min_brightness = 100
 brightness_path = '/sys/class/backlight/intel_backlight/brightness'
 
