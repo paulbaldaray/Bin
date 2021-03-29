@@ -4,5 +4,6 @@
 [ -z "$1" ] && set main.cpp
 OUT="/tmp/icpp_tmp_fec951c1"
 g++ -std=c++11 $1 -o $OUT || exit 1
+# clang++ -std=c++11 $1 -o $OUT || exit 1
 $OUT
 rm $OUT

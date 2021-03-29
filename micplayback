@@ -1,0 +1,11 @@
+#!/bin/zsh
+val=3000
+if [[ $# -eq 1 ]]; then
+    val="$1"
+fi
+if [[ ! -z "$({pactl unload-module module-loopback 2>&1})" ]]; then
+    pactl load-module module-loopback latency_msec=$val > /dev/null 2>&1
+    echo 'ON'
+else
+    echo 'OFF'
+fi

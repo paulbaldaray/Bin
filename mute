@@ -1,0 +1,5 @@
+#!/bin/bash
+sources="$(pactl list sources | grep 'Source #.*' | cut -d'#' -f2)"
+for i in $sources; do
+    pactl set-source-mute $i toggle
+done
