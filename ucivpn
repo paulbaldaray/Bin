@@ -2,6 +2,7 @@
 # followed this guide: https://github.com/dnschneid/crouton/wiki/Using-Cisco-AnyConnect-VPN-with-openconnect
 # using packages: openconnect openvpn vpnc net-tools
 # the names may differ based on distro, but these should work on Arch
+exit 1 # Deprecated because DUO
 OVX='/usr/sbin/openvpn'
 OCX='/usr/sbin/openconnect'
 IPX='/bin/ip'

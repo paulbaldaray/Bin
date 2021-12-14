@@ -1,0 +1,16 @@
+#!/bin/bash
+RDIR="/tmp/irs_tmp_9e632bfef71e4f2c66511645"
+if [[ ! -d "$RDIR" ]]; then
+  cargo new "$RDIR"
+fi
+[ -z "$1" ] && [ ! -f "main.rs" ] && echo "irs: No src file" && exit 1
+[ ! -z "$1" ] && [ ! -f "$1" ] && echo "irs: '$1' file does not exist" && exit 1
+[ -z "$1" ] && set main.rs
+mkdir -p "$RDIR/src/bin"
+RFILE="irs_tmp_$(openssl rand -hex 12)"
+cp "$1" "$RDIR/src/bin/$RFILE.rs"
+cd "$RDIR"
+RERR="/tmp/irs_tmp_err_$(openssl rand -hex 12)"
+ROUT="/tmp/irs_tmp_out_$(openssl rand -hex 12)"
+cargo run --bin "$RFILE" > "$ROUT" 2> "$RERR" && cat "$ROUT" || cat "$RERR"
+rm -f "src/bin/$RFILE.rs" "$ROUT" "$RERR"

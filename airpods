@@ -5,6 +5,7 @@ if [[ ! -z "$off" ]]; then
     pulseaudio --start
     bluetoothctl power on
     name="$(bluetoothctl paired-devices | cut -d' ' -f2)"
+    echo "Connecting to $name"
     bluetoothctl connect "$name"
 else
     bluetoothctl power off

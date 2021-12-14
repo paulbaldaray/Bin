@@ -2,6 +2,7 @@
 # requires dmenu
 BOOKDIR="$HOME/Books"
 cd "$BOOKDIR"
+mv ~/Downloads/*.pdf '0' &> /dev/null
 while ((1)); do
 	book=$(ls | dmenu -p 'Book:')
 	if [ -d "$book" ]; then
