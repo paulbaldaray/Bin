@@ -1,0 +1,62 @@
+#!/bin/python3
+import argparse
+import os
+import sys
+
+pname='brightness'
+max_brightness = 19200
+min_brightness = 100
+brightness_path = '/sys/class/backlight/intel_backlight/brightness'
+
+def panic(msg: str):
+  print(f'{pname}:', msg)
+  sys.exit(1)
+
+def main():
+  parser = argparse.ArgumentParser()
+  add_arguments(parser)
+  args = parser.parse_args()
+  if os.access(brightness_path, os.F_OK):
+    change_backlight(args)
+  else:
+    change_xrandr_brightness(args)
+
+def add_arguments(parser):
+  parser.add_argument(
+        'change',
+      type=int,
+      help='increment or decrement by thousandths of total percentage'
+  )
+  parser.add_argument(
+      '-s',
+      '--silent',
+      dest='silent',
+      action='store_true',
+      default=False,
+      help='disable printing out changes'
+  )
+
+def change_backlight(args):
+  if not os.access(brightness_path, os.R_OK | os.W_OK):
+    panic('read and write permissions denied')
+  with open(brightness_path, 'r+') as bfile:
+    brightness = int(bfile.readline())
+    new_brightness = brightness + int(args.change / 1000 * max_brightness)
+    new_brightness = min(max_brightness, max(min_brightness, new_brightness))
+    bfile.seek(0)
+    bfile.truncate()
+    bfile.write(str(new_brightness))
+    if not args.silent:
+      print('backlight', brightness, '->', new_brightness)
+
+def change_xrandr_brightness(args):
+  with os.popen('xrandr --verbose | grep -i brightness') as xrandr_cmd:
+    brightness = float(xrandr_cmd.readline().strip().split()[1])
+    new_brightness = round(args.change / 1000 + brightness, 2)
+    new_brightness = min(1, max(.1, new_brightness))
+    os.system(f'xrandr --output DP-2 --brightness {new_brightness}')
+    if not args.silent:
+      print('xrandr', brightness, '->', new_brightness)
+
+if __name__ == '__main__':
+  main()
